@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: web-plus
+  profiles:
+    active: pro
+server:
+  port: 8085
+
+---
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: org.h2.Driver
+    schema: classpath:db/leave.sql
+#    data: classpath:db/leave.db
+    url: jdbc:h2:mem:test?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8
+    username: root
+    password: test
+
+logging:
+  level:
+    root: INFO
+---
+spring:
+  profiles: pro
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    max-connections: 20000
+    min-SpareThreads: 20
+    acceptCount: 700
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/leave?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8
+    username: leave
+    password: leave
+#    schema: classpath:db/leave.sql
+    driver-class-name: com.mysql.jdbc.Driver
+#    continue-on-error: true
+#    initialization-mode: always
+    db-name: leave
+
+logging:
+  level:
+    root: ERROR

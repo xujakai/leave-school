@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>离校信息登记</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>$.noConflict();</script>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
+
+    <script>
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        if (IsPC()) {
+            window.location.href = '/index.html';
+        }
+    </script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current">
+        <header class="bar bar-nav">
+            <h1 class='title'>离校信息登记表</h1>
+        </header>
+        <div class="content">
+            <div class="list-block">
+                <ul>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-gender"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">班级</div>
+                                <div class="item-input">
+                                    <input type="text" id='picker' placeholder="请选择班级" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">学号</div>
+                                <div class="item-input">
+                                    <input id="stuNo" type="text" placeholder="请输入学号">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- Text inputs -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-name"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">姓名</div>
+                                <div class="item-input">
+                                    <input id="stuName" type="text" placeholder="请输入姓名">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Switch (Checkbox) -->
+                    <li>
+                        <div class="item-content">
+                            <div class="item-media"><i class="icon icon-form-toggle"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title label">离校</div>
+                                <div class="item-input">
+                                    <label class="label-switch">
+                                        <input id="go" type="checkbox">
+                                        <div id="goClick" class="checkbox"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <div id="input">
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon icon-form-name"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">去向</div>
+                                    <div class="item-input">
+                                        <input id="goDescribe" class="xjk" type="text" placeholder="请输入去向">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon icon-form-email"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">电话</div>
+                                    <div class="item-input">
+                                        <input id="phone" class="xjk" type="text" placeholder="请输入电话">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- Date -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">离校时间</div>
+                                    <div class="item-input">
+                                        <input id="goTime" class="xjk" type="date" placeholder="离校时间">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Date -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">返校时间</div>
+                                    <div class="item-input">
+                                        <input id="backTime" class="xjk" type="date" placeholder="离校时间"
+                                               value="2014-04-30">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+            <div class="content-block">
+                <div class="row">
+                    <div class="col-50"><a href="http://www.topme.pro"
+                                           class="external button button-big button-fill button-danger">取消</a></div>
+                    <div class="col-50"><a href="#" id="submit"
+                                           class="button button-big button-fill button-success">提交</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type='text/javascript'>
+    document.getElementById("go").setAttribute('value', 'close');
+
+
+    function insertInput() {
+        jQuery('#input').fadeIn();
+    }
+
+    function removeInput() {
+        jQuery('#input').fadeOut();
+    }
+
+    function switchGo() {
+        if (document.getElementById("go").value == 'close') {
+            removeInput()
+        } else {
+            insertInput()
+        }
+    };
+
+    jQuery('#stuNo').blur(function (e) {
+        var stuNo = getValueById('stuNo');
+        if (stuNo.length !== 10) {
+            $.alert('请输入正确的学号！', function () {
+                jQuery('#stuNo').focus();
+            });
+            return;
+        }
+    });
+
+    jQuery('#phone').blur(function (e) {
+        var phone = getValueById('phone');
+        if (phone.length !== 11) {
+            $.alert('请输入正确的手机号！', function () {
+                jQuery('#phone').focus();
+            });
+            return;
+        }
+    });
+
+    function insertClazzHTML(hot) {
+        var html = '';
+        for (var i = 0; i < 2; i++) {
+            html = html + "<option>" + hot[i] + "</option>";
+        }
+        return html;
+    };
+
+    window.onload = function () {
+        document.getElementById("goTime").value = fmtDate();
+        document.getElementById("backTime").value = fmtDate();
+        jQuery('#input').hide();
+        $.ajax({
+            url: "/clazz/list",
+            type: "GET",
+            success: function (res) {
+                var list = res.data.map((e) => {
+                    return e.clazzName
+                })
+
+                $("#picker").picker({
+                    toolbarTemplate: '<header class="bar bar-nav">\
+  <button class="button button-link pull-right close-picker">确定</button>\
+  <h1 class="title">请选择班级</h1>\
+  </header>',
+                    cols: [
+                        {
+                            textAlign: 'center',
+                            values: list
+                        }
+                    ]
+                });
+
+            },
+            error: function () {
+                $.alert('当前网络异常，请重新刷新页面！', function () {
+                    document.location.reload();
+                });
+            }
+        })
+    }
+
+
+    document.getElementById('goClick').onclick = function (ev) {
+        var v = document.getElementById("go").value
+        if (v == 'on') {
+            document.getElementById("go").setAttribute('value', 'close');
+        } else {
+            document.getElementById("go").setAttribute('value', 'on');
+        }
+        switchGo()
+    }
+
+
+    document.getElementById('submit').onclick = function (ev) {
+        var clazzName = getValueById("picker");
+        var stuNo = getValueById("stuNo");
+        var stuName = getValueById("stuName");
+        var go = getValueById("go");
+        var goDescribe = getValueById("goDescribe");
+        var phone = getValueById("phone");
+        var goTime = getValueById("goTime");
+        var backTime = getValueById("backTime");
+
+        if (clazzName.length == 0) {
+            $.alert('请选择班级！');
+            return;
+        }
+
+        if (stuName.length == 0) {
+            $.alert('请输入姓名！');
+            return;
+        }
+
+        if (go == 'on') {
+            go = '1'
+        } else {
+            go = '0'
+        }
+
+        $.ajax({
+            url: "/leave-school-registration/add",
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            data: JSON.stringify(
+                {
+                    'clazzName': clazzName,
+                    'stuNo': stuNo,
+                    'stuName': stuName,
+                    'go': go,
+                    'goDescribe': goDescribe,
+                    'phone': phone,
+                    'goTime': goTime,
+                    'backTime': backTime,
+                }
+            ),
+            success: function (res) {
+                if (res == "null") {
+                    $.alert('网络似乎出了点问题！');
+                    return false
+                } else {
+                    if (res) {
+                        if (res.success) {
+                            $.alert('登记成功！', function () {
+                                document.location.reload();
+                            });
+
+                        } else {
+                            $.alert(res.msg);
+                        }
+                    }
+                }
+            }
+        })
+    };
+
+    function getValueById(id) {
+        var v = document.getElementById(id);
+        if (v == undefined) {
+            return "";
+        } else {
+            return v.value;
+        }
+    };
+
+    function fmtDate() {
+        var time = new Date().Format("yyyy-MM-dd");
+        return time;
+    };
+    Date.prototype.Format = function (fmt) { //author: meizz
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "H+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    };
+
+</script>
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm-extend.min.js' charset='utf-8'></script>
+</body>
+</html>

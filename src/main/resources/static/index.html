@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width" />
+    <title>离校管理系统</title>
+    <script>
+      function IsPC() {
+        var userAgentInfo = navigator.userAgent;
+        var Agents = ["Android", "iPhone",
+          "SymbianOS", "Windows Phone",
+          "iPad", "iPod"];
+        var flag = true;
+        for (var v = 0; v < Agents.length; v++) {
+          if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+          }
+        }
+        return flag;
+      }
+      if(!IsPC()){
+        window.location.href='/mobile.html';
+      }
+    </script>
+  <link rel="shortcut icon" href="./favicon.png"><link href="./css/index.css" rel="stylesheet"></head>
+
+  <body>
+    <div id="ice-container"></div>
+  <script type="text/javascript" src="./js/index.js"></script></body>
+</html>
